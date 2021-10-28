@@ -20,6 +20,7 @@ dbConnection();
 // Rutas
 app.use('/api/usuario',require('./routes/usuarios'));
 app.use('/api/login',require('./routes/auth'));
+app.use('/api/upload',require('./routes/uploads'));
 
 // app.get('/api/usuario', ( req, res ) => {
 
