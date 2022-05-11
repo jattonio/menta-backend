@@ -17,10 +17,10 @@ const usuarioSchema = Schema ({
         type: String,
         required: true
     },
-    img: {
+    avatar: {
         type: String
     },
-    rol: {
+    role: {
         type: String,
         required: true,
         default: 'USER_ROLE '

@@ -19,11 +19,11 @@ const actualizarImagen = async ( tipo, id, nombreArchivo  ) => {
                 console.log('No se encontró usuario.');
                 return false;
             }
-            const pathViejo = `./uploads/usuarios/${ usuario.img }`;
+            const pathViejo = `./uploads/usuarios/${ usuario.avatar }`;
             borrarImagen( pathViejo ); 
 
             // actualizar nueva imagen
-            usuario.img = nombreArchivo;
+            usuario.avatar = nombreArchivo;
             await usuario.save();
             return true;
             break;

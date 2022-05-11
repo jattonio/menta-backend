@@ -3,12 +3,13 @@ const jwt = require('jsonwebtoken');
 const validarJWT = ( req, res, next ) => {
 
     // Leer Token
-    const token = req.header('x-token');
+    const token = req.header('x-token');   
+    console.log('HEADERS BKND', token);
 
     if ( !token ) {
         return res.status(401).json({
             ok: false,
-            msg: 'Se requiere Token para continuar.'
+            msg: 'Acceso no Autorizado'
         });
     }
 
@@ -20,10 +21,9 @@ const validarJWT = ( req, res, next ) => {
         
     } catch (error) {
         // Token no válido
-        console.log('Error:8000: ',error);
         return res.status(401).json({
             ok: false,
-            msg: 'Token no válido.'
+            msg: 'Acceso no Autorizado'
         });
     }
 }

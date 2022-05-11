@@ -10,7 +10,6 @@ const { validarJWT } = require('../middlewares/validar-jwt');
 
 const router = Router();
 
-
 router.post( '/', 
             [
                 check( 'email', 'El correo es obligatorio.' ).isEmail(),

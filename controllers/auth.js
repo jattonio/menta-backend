@@ -13,10 +13,10 @@ const login = async ( req, res = response ) => {
     try {
 
         
-        const usuarioDB = await Usuario.findOne({ email });
+        const usuario = await Usuario.findOne({ email });
 
         // Verificar email
-        if ( !usuarioDB ) {
+        if ( !usuario ) {
             return res.status(404).json({
                 ok: false,
                 msg: 'Contraseña o email no válidos. '
@@ -24,7 +24,7 @@ const login = async ( req, res = response ) => {
         }
 
         // Verificar contraseña
-        const validPassword = bcrypt.compareSync( password, usuarioDB.password );
+        const validPassword = bcrypt.compareSync( password, usuario.password );
 
         if ( !validPassword ) {
             return res.status(404).json({
@@ -34,11 +34,12 @@ const login = async ( req, res = response ) => {
         }
 
         // Generar Token JWT
-        const token = await generarJWT( usuarioDB.id );
+        const token = await generarJWT( usuario.id );
 
         res.json({
             ok: true,
-            token
+            token,
+            usuario
         });
         
     } catch (error) {
@@ -68,7 +69,7 @@ const googleSignIn = async ( req, res = response ) => {
                 nombre: name,
                 email,
                 password: '@@@',
-                img: picture,
+                avatar: picture,
                 google: true
             });
         } else {
@@ -76,7 +77,7 @@ const googleSignIn = async ( req, res = response ) => {
             usuario =  usuarioDB;
             usuario.google = true;
             usuario.password = '@@@';
-            usuario.img = picture;
+            usuario.avatar = picture;
         }
 
         // Guardar en BBDD
@@ -106,9 +107,13 @@ const renewToken = async ( req, res = response ) => {
 
     const token = await generarJWT( uid );
 
+    // Obtener usuario UID 
+    const usuario = await Usuario.findById( uid );
+
     res.json({
         ok: true,
-        token
+        token,
+        usuario
     });
 
 }

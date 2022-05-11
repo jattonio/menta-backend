@@ -74,9 +74,9 @@ const fileUpload = ( req, res = response  ) => {
 
 const retornaImagen = ( req, res = response ) => {
     const tipo = req.params.tipo;
-    const img  = req.params.img;
+    const avatar  = req.params.avatar;
 
-    const pathImg = path.join( __dirname, `../uploads/${ tipo }/${ img }` );
+    const pathImg = path.join( __dirname, `../uploads/${ tipo }/${ avatar }` );
 
     if ( fs.existsSync( pathImg ) ) {
         res.sendFile( pathImg );
