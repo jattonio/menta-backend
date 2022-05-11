@@ -15,7 +15,13 @@ app.use(cors());
 app.use( express.json() );
 
 // Conexión a BD
-dbConnection(); 
+dbConnection()
+    .then( () => {
+        console.log('Confirmando conexión exitosa... ');
+    })
+    .catch(() => {
+        console.log('Error en Conexión de BBDD, consulte al Administrador.');
+    });
 
 // Directorio público
 app.use( express.static('public') );
