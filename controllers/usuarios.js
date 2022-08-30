@@ -26,8 +26,7 @@ const getUsuarios = async( req, res ) => {
 
 const crearUsuario = async( req, res = response ) => {
 
-    const { password, email } = req.body;
-
+    const { nombre, email, password  } = req.body;
 
     try {
         // Validar si existe el usuario a registrar
