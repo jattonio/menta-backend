@@ -28,6 +28,7 @@ app.use( express.static('public') );
 
 // Rutas
 app.use('/api/usuario',require('./routes/usuarios'));
+app.use('/api/signup',require('./routes/signup'));
 app.use('/api/login',require('./routes/auth'));
 app.use('/api/upload',require('./routes/uploads'));
 
