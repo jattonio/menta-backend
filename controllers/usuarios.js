@@ -36,7 +36,7 @@ const crearUsuario = async( req, res = response ) => {
             // Usuario/email ya está registrado
             return res.status(400).json({
                 ok: false,
-                msg: 'El correo ya está registrado.'
+                msg: 'Este correo ya está registrado. Intenta con otro.'
             });
         }
 
