@@ -7,12 +7,12 @@ const userSchema = Schema ({
         type: String,
         required: true
     },
-    email: {
-        type: String,
-        required: true,
-        unique: true
-
-    },
+    contact:[{
+        email: {
+            type: String,
+            required: true,    
+        }
+    }],
     password: {
         type: String,
         required: true
@@ -23,17 +23,41 @@ const userSchema = Schema ({
     role: {
         type: String,
         required: true,
-        default: 'USER_ROLE '
+        default: 'ADMIN'
     },
     google: {
         type: Boolean,
         default: false
     },
+    status: {
+        type: String,
+        required: true,
+        default: 'A' //ACTIVE
+    },
+    dates_log: [{
+        create_date: {
+            type: Date,
+            required: true,
+            default: Date.now()
+        },
+        update_date: {
+            type: Date,
+            required: false
+        },
+        delete_date: {
+            type: Date,
+            required: false
+        }
+    }],
+    token: {
+        type: String,
+        required: false
+    }
 
 });
 
 userSchema.method('toJSON', function(){
-    const { __v,_id, password, ...object } = this.toObject();
+    const { __v,_id, password, create_date, update_date, delete_date, status, ...object } = this.toObject();
     object.uid = _id;
     return object;
 });

@@ -72,6 +72,53 @@ const crearUsuario = async( req, res = response ) => {
 
 }
 
+
+const signup = async( req, res = response ) => {
+
+    const { nombre, email, password  } = req.body;
+
+    try {
+        // Validar si existe el usuario a registrar
+        const existeUsuario = await Usuario.findOne({ email:email });
+
+        if ( existeUsuario ) {
+            // Usuario/email ya está registrado
+            return res.status(400).json({
+                ok: false,
+                msg: 'Este correo ya está registrado. Intenta con otro.'
+            });
+        }
+
+        const usuario = new Usuario( req.body );
+
+        // Encriptar contraseña
+         const salt = bcrypt.genSaltSync();
+         usuario.password = bcrypt.hashSync( password, salt );
+
+        // Crear usuario
+        await usuario.save();
+
+        // Generar Token JWT
+        const token = await generarJWT( usuario.id );
+
+        // Respuesta de registro insertado
+        res.json({
+            ok: true,
+            usuario,
+            token
+        });
+    } catch (error) {
+        // Error inesperado
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error inesperado'
+        });
+    }
+
+
+}
+
 const actualizarUsuario = async( req, res = response ) => { 
 
     // TODO: Validar token y comprobar si es usuario correcto
@@ -154,6 +201,7 @@ const borrarUsuario = async( req, res = response ) => {
 module.exports = {
     getUsuarios,
     crearUsuario,
+    signup,
     actualizarUsuario,
     borrarUsuario
 }
