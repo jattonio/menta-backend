@@ -7,12 +7,10 @@ const userSchema = Schema ({
         type: String,
         required: true
     },
-    contact:[{
-        email: {
-            type: String,
-            required: true,    
-        }
-    }],
+    email: {
+        type: String,
+        required: true,    
+    },
     password: {
         type: String,
         required: true
@@ -23,7 +21,7 @@ const userSchema = Schema ({
     role: {
         type: String,
         required: true,
-        default: 'ADMIN'
+        default: 'Admin'
     },
     google: {
         type: Boolean,
@@ -35,16 +33,16 @@ const userSchema = Schema ({
         default: 'A' //ACTIVE
     },
     dates_log: [{
-        create_date: {
+        created_at: {
             type: Date,
             required: true,
             default: Date.now()
         },
-        update_date: {
+        updated_at: {
             type: Date,
             required: false
         },
-        delete_date: {
+        deleted_at: {
             type: Date,
             required: false
         }

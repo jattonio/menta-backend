@@ -12,17 +12,13 @@ const signup = async( req, res = response ) => {
 
     const { username, email, password  } = req.body;
 
-    console.log("Entrando a Signup Component");
-
-    console.log(email);
-
     try {
         // Validar si existe el usuario a registrar
         const userExist = await User.findOne({ email:email, status:'A' });
 
-        console.log(userExist);
 
         if ( userExist ) {
+            console.log('usuario SI existe ');
             // Usuario/email ya está registrado
             return res.status(400).json({
                 ok: false,
@@ -30,9 +26,8 @@ const signup = async( req, res = response ) => {
             });
         }
 
+        
         const user = new User( req.body );
-
-        console.log(user);
 
         // Encriptar contraseña
          const salt = bcrypt.genSaltSync();
