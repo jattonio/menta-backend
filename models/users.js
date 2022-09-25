@@ -2,10 +2,19 @@ const  { Schema, model } = require('mongoose');
 
 
 const userSchema = Schema ({
-
+    // acount_id: {
+    //     type: Number,
+    //     required: true,
+    //     unique: true
+    // },
     username: {
-        type: String,
-        required: true
+        firstname: {
+            type: String,
+            required: true
+        },
+        lastname:{
+            type: String
+        }
     },
     email: {
         type: String,
@@ -16,7 +25,8 @@ const userSchema = Schema ({
         required: true
     },
     avatar: {
-        type: String
+        type: String,
+        default: 'avatar-s-4.jpg'
     },
     role: {
         type: String,
@@ -29,10 +39,9 @@ const userSchema = Schema ({
     },
     status: {
         type: String,
-        required: true,
         default: 'A' //ACTIVE
     },
-    dates_log: [{
+    dates_log: {
         created_at: {
             type: Date,
             required: true,
@@ -46,7 +55,7 @@ const userSchema = Schema ({
             type: Date,
             required: false
         }
-    }],
+    },
     token: {
         type: String,
         required: false
@@ -55,7 +64,7 @@ const userSchema = Schema ({
 });
 
 userSchema.method('toJSON', function(){
-    const { __v,_id, password, create_date, update_date, delete_date, status, ...object } = this.toObject();
+    const { __v,_id, password, dates_log, status, ...object } = this.toObject();
     object.uid = _id;
     return object;
 });
