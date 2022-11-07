@@ -16,7 +16,7 @@ const signup = async( req, res = response ) => {
         // Validar si existe el usuario a registrar
         const userExist = await User.findOne({ email:email, status:'A' });
 
-        console.log('USER EXIST');
+        console.log('¿EXISTE USUARIO?');
         console.log(userExist);
 
         if ( userExist ) {
@@ -30,7 +30,7 @@ const signup = async( req, res = response ) => {
 
         
         const user = new User({ username:{firstname: username}, email:email, password:password });
-        console.log('NEW USER');
+        console.log('CREANDO NUEVO USUARIO');
         console.log(user);
 
         // Encriptar contraseña

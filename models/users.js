@@ -25,8 +25,7 @@ const userSchema = Schema ({
         required: true
     },
     avatar: {
-        type: String,
-        default: 'avatar-s-4.jpg'
+        type: String
     },
     role: {
         type: String,
