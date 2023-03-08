@@ -15,7 +15,7 @@ const dbConnection = async() => {
 
     } catch ( err ) {
         // console.error ( err );
-        const mnsjError = 'Error[00005]: NO SE PUDO ESTABLECER CONEXION CON LA BBDD.'; 
+        const mnsjError = 'Error[00005]: NO SE PUDO ESTABLECER CONEXION CON LA BBDD.'+err; 
         console.error( mnsjError );
         throw new Error( mnsjError );
     }

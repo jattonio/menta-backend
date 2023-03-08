@@ -4,7 +4,7 @@ const validarJWT = ( req, res, next ) => {
 
     // Leer Token
     const token = req.header('x-token');   
-    console.log('...VALIDANDO JWT');
+    console.log('  ....Validando JWT');
 
     if ( !token ) {
         console.log('NO EXISTE TOKEN. Acceso no Autorizado');
@@ -19,11 +19,11 @@ const validarJWT = ( req, res, next ) => {
         // Validar Token
         const { uid } = jwt.verify( token, process.env.JWT_SECRET );        
         req.uid = uid;
-        console.log('   ..Token OK');
+        console.log('    ..Token OK');
         next();
         
     } catch (error) {
-        console.log('   ..TOKEN NO VÁLIDO. Acceso no Autorizado');
+        console.log('    ..Token NO VÁLIDO. Acceso no Autorizado');
         // Token no válido
         return res.status(401).json({
             ok: false,

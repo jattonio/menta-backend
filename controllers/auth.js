@@ -15,7 +15,8 @@ const login = async ( req, res = response ) => {
         
         const user = await User.findOne({ email });
 
-        console.log(user);
+        console.log('LOGIN CON USER: ' + user.email);
+//        console.log(user.email);
 
         // Verificar email
         if ( !user ) {
