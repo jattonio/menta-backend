@@ -2,7 +2,7 @@ const { response } = require('express');
 const bcrypt = require('bcryptjs');
 
 //const Usuario = require('../models/usuario');
-const User = require('../models/users');
+const User = require('../models/user');
 const { generarJWT } = require('../helpers/jwt');
 
 
@@ -14,10 +14,10 @@ const signup = async( req, res = response ) => {
 
     try {
         // Validar si existe el usuario a registrar
-        const userExist = await User.findOne({ email:email, status:'A' });
+        const userExist = await User.findOne({ email, status:'A' });
 
-        console.log('¿EXISTE USUARIO?');
-        console.log(userExist);
+        console.log('¿EXISTE USUARIO?',userExist);
+        // console.log(userExist);
 
         if ( userExist ) {
             console.log('usuario SI existe ');

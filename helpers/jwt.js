@@ -8,15 +8,15 @@ const generarJWT = ( uid ) => {
             uid
         };
     
-        jwt.sign( payload, process.env.JWT_SECRET, {
-            expiresIn: '1m'
-        }, ( err, token ) => {
+        jwt.sign( payload, process.env.JWT_SECRET, 
+            { expiresIn: '1m' }, 
+            ( err, token ) => {
 
             if ( err ) {
                 console.log(err);
-                reject('No se pudo generar token');
+                reject('Error al generar Token');
             } else{
-                console.log('TOKEN GENERADO');
+                // console.log('TOKEN GENERADO');
                 resolve(token);
             }
     

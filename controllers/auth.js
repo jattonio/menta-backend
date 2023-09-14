@@ -1,8 +1,7 @@
 const { response } = require('express');
 const bcrypt = require('bcryptjs');
 
-const Usuario = require('../models/usuario');
-const User = require('../models/users');
+const User = require('../models/user');
 const { generarJWT } = require('../helpers/jwt');
 const { googleVerify } = require('../helpers/google-verify');
 
@@ -13,14 +12,13 @@ const login = async ( req, res = response ) => {
 
     try {
         
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email, status:'A' });
 
-        console.log('LOGIN CON USER: ' + user.email);
-//        console.log(user.email);
+        console.log('LOGIN CON USER: ' + user);
 
         // Verificar email
         if ( !user ) {
-            console.log("Usuario no existe");
+            console.log("Usuario NO existe");
             return res.status(400).json({
                 ok: false,
                 msg: 'Contraseña o email no válidos. '
@@ -66,12 +64,12 @@ const googleSignIn = async ( req, res = response ) => {
 
         const { name, email, picture } = await googleVerify( googleToken );
 
-        const usuarioDB = await Usuario.findOne({ email });
+        const usuarioDB = await User.findOne({ email });
         let usuario;
 
         if ( !usuarioDB ) {
             // Si no existe el usuario
-            usuario = new Usuario({
+            usuario = new User({
                 nombre: name,
                 email,
                 password: '@@@',
@@ -114,7 +112,7 @@ const renewToken = async ( req, res = response ) => {
     const token = await generarJWT( uid );
 
     // Obtener usuario UID 
-    const usuario = await Usuario.findById( uid );
+    const usuario = await User.findById( uid );
 
     res.json({
         ok: true,

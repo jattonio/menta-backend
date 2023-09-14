@@ -2,20 +2,14 @@ const  { Schema, model } = require('mongoose');
 
 
 const userSchema = Schema ({
-    // acount_id: {
-    //     type: Number,
-    //     required: true,
-    //     unique: true
-    // },
-    username: {
-        firstname: {
-            type: String,
-            required: true
-        },
-        lastname:{
-            type: String
-        }
+    firstName: {
+        type: String,
+        required: true
     },
+    lastName:{
+        type: String
+    },
+
     email: {
         type: String,
         required: true,    
@@ -38,7 +32,7 @@ const userSchema = Schema ({
     },
     status: {
         type: String,
-        default: 'A' //ACTIVE
+        default: 'A' // {'A':Active, 'I':Inactive}
     },
     dates_log: {
         created_at: {
