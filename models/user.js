@@ -59,7 +59,7 @@ const userSchema = Schema ({
 
 userSchema.method('toJSON', function(){
     const { __v,_id, password, dates_log, status, ...object } = this.toObject();
-    object.uid = _id;
+    object.id = _id;
     return object;
 });
 
