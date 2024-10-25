@@ -10,7 +10,7 @@ const validarJWT = ( req, res, next ) => {
         console.log('[VALIDARJWT][JWT0001] NO EXISTE TOKEN. Acceso no Autorizado ');
         return res.status(401).json({
             ok: false,
-            msg: 'Acceso no Autorizado [JWT0001]'
+            msg: '[validarJWT]: Acceso no Autorizado [JWT0001]'
         });
     }
 
