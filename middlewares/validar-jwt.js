@@ -15,7 +15,6 @@ const validarJWT = ( req, res, next ) => {
     }
 
     try {
-        // console.log('VALIDANDO TOKEN..');
         // Validar Token
         const { uid } = jwt.verify( token, process.env.JWT_SECRET );        
         req.uid = uid;
@@ -23,8 +22,8 @@ const validarJWT = ( req, res, next ) => {
         next();
         
     } catch (error) {
-        console.log('[VALIDARJWT][JWT0003]Token NO VÁLIDO. Acceso no Autorizado',error);
         // Token no válido
+        console.log('[VALIDARJWT][JWT0003]Token NO VÁLIDO. Acceso no Autorizado',error);
         return res.status(401).json({
             ok: false,
             msg: '[VALIDARJWT][JWT0004] Acceso no Autorizado'
