@@ -57,7 +57,7 @@ app.use( express.json() );
 // Conexión a BD
 dbConnection()
     .then( () => {
-        console.log('Confirmando conexión exitosa... ');
+        console.log('¡Conexión Confirmada!');
     })
     .catch(() => {
         console.log('Error en Conexión de BBDD, consulte al Administrador.');

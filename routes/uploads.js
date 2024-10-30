@@ -13,6 +13,6 @@ router.use( expressFileUpload() );
 
 router.post( '/:tipo/:id', validarJWT, fileUpload );
 
-router.get( '/:tipo/:img', retornaImagen );
+router.get( '/:tipo/:avatar', retornaImagen );
 
 module.exports = router;

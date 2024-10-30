@@ -4,7 +4,7 @@ const validarJWT = ( req, res, next ) => {
 
     // Leer Token
     const token = req.header('x-token') || '';   
-    console.log('[VALIDARJWT]: Iniciando], ', token);
+    console.log('[VALIDARJWT]: Iniciando.., token: ', token);
 
     if ( !token ) {
         console.log('[VALIDARJWT][JWT0001] NO EXISTE TOKEN. Acceso no Autorizado ');
